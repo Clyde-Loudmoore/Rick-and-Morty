@@ -6,7 +6,7 @@ const StyledHeader = styled.header`
   margin-bottom: 18px;
   
   .container {
-    max-width: 1000px;
+    max-width: 1020px;
     margin: 0 auto;
     padding: 6px 0;
     display: flex;

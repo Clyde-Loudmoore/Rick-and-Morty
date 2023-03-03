@@ -6,7 +6,7 @@ const StyledFooter = styled.footer`
   margin-top: auto;
 
   .container {
-    max-width: 1000px;
+    max-width: 1020px;
     margin: 0 auto;
     text-align: center;
     padding: 6px 0;

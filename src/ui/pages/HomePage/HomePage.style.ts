@@ -4,21 +4,15 @@ const StyledHomePage = styled.main`
   background-color: #ffffff;
 
   .container {
-    max-width: 1000px;
+    max-width: 1020px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  .filter-by-name {
-    max-width: 240px;
-    width: 100%;
-    border: 1px solid grey;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  .filtration {
+    margin-bottom: 61px;
   }
 
   .filter-input {
@@ -28,6 +22,13 @@ const StyledHomePage = styled.main`
 
   .filter-input:active {
     border: none;
+  }
+
+  .characters-wrapper {
+    margin-bottom: 48px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
   }
 `;
 
