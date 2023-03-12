@@ -1,5 +1,5 @@
 import React from 'react';
-import type { FormEventHandler, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import StyledDropdown from 'src/ui/components/Dropdown/Dropdown.styled';
 
@@ -8,8 +8,7 @@ import useOnClickOutside from 'src/hooks/useOnClickOutside';
 import arrowDownIcon from 'src/ui/assets/icons/arrow-drop-down.png';
 
 type PropsType = {
-  // onClick?: FormEventHandler;
-  title?: string;
+  title: string;
   active?: boolean;
   children?: ReactNode;
 };

@@ -13,6 +13,8 @@ const StyledHomePage = styled.main`
 
   .filtration {
     margin-bottom: 61px;
+    display: flex;
+    gap: 20px;
   }
 
   .filter-input {

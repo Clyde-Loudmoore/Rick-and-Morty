@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const StyledInputField = styled.div`
   max-width: 240px;
+  width: 100%;
   padding-left: 15px;
   border: 1px solid grey;
   border-radius: 6px;

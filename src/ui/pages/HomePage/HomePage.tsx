@@ -3,22 +3,24 @@ import React from 'react';
 import type { ChangeEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import StyledHomePage from 'src/ui/pages/HomePage/HomePage.style';
-import InputField from 'src/ui/components/InputField/InputField';
-import Dropdown from 'src/ui/components/Dropdown/Dropdown';
-import Character from 'src/ui/pages/HomePage/Character/Character';
-import Button from 'src/ui/components/Button.styled';
-
-import emblemImg from 'src//ui/assets/images/emblem.png';
-
 import type { CharacterType } from 'src/types';
 
 import characterApi from 'src/api/characterApi';
 import useDebounce from 'src/hooks/useDebounce';
 
+import StyledHomePage from 'src/ui/pages/HomePage/HomePage.style';
+import InputField from 'src/ui/components/InputField/InputField';
+import Dropdown from 'src/ui/components/Dropdown/Dropdown';
+import Character from 'src/ui/pages/HomePage/Character/Character';
+import Button from 'src/ui/components/Button.styled';
+import FilterBySpecies from 'src/ui/components/Dropdown/FilterBySpecies/FilterBySpecies';
+
+import emblemImg from 'src//ui/assets/images/emblem.png';
+
 const HomePage: React.FC = () => {
   const [charactersInfo, setCharactersInfo] = React.useState<CharacterType[]>();
   const [filterCharacters, setFilterCharacters] = React.useState('');
+  const [species, setSpecies] = React.useState<CharacterType[]>();
 
   const [searchParams, setSearchParams] = useSearchParams({});
 
@@ -37,6 +39,15 @@ const HomePage: React.FC = () => {
   }
 
   React.useEffect(() => {
+    (async () => {
+      const spec = await characterApi.getAllCharacters();
+      const arraySpec = spec.data.results;
+
+      setSpecies(arraySpec);
+    })();
+  }, []);
+
+  React.useEffect(() => {
     if (debouncedFilter) {
       searchParams.set('name', debouncedFilter as string);
     } else {
@@ -49,22 +60,25 @@ const HomePage: React.FC = () => {
   React.useEffect(() => {
     (async () => {
       const name = searchParams.get('name') || '';
-      // const species = searchParams.get('species') || '';
+      const species = searchParams.get('species') || '';
       // const gender = searchParams.get('gender') || '';
       // const status = searchParams.get('status') || '';
+      const page = searchParams.get('page') || '1';
 
       setSearchParams({
         name,
-        // species,
+        species,
         // gender,
         // status,
+        page,
       });
 
       const characters = characterApi.getFilteredCharacters({
         name,
-        //  species,
+        species,
         //  gender,
         //  status,
+        page,
       });
       const arrayCharacters = (await characters).data.results;
       setCharactersInfo(arrayCharacters);
@@ -85,7 +99,9 @@ const HomePage: React.FC = () => {
             onChange={handleChangeSearch}
           />
 
-          {/* <Dropdown /> */}
+          <Dropdown title="Species">
+            <FilterBySpecies species={species} />
+          </Dropdown>
         </div>
 
         <div className="characters-wrapper">
